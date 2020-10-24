@@ -10,16 +10,15 @@ Steps Involved :
     -- add room entity and other annotations
     -- make dao classes
     -- Add entities and type converters in db class
-    -- Make use of package segregation mainly [data domain presentation]
-    -- add datasource classes depending on caching and data persitence strategy 
-    -- repository implementation 
-    -- view model and view model factories 
-    -- navigation and fragments 
-    -- dependency injection 
-    -- binding objects to xml 
-    -- kotlin / java ui and business logic implementation 
-    --testing 
-    
+    -- Make use of package segregation mainly [data , domain , presentation , di]
+    -- add datasource classes depending on caching and data persitence strategy
+    -- repository implementation
+    -- view model and view model factories
+    -- navigation and fragments
+    -- dependency injection
+    -- binding objects to xml
+    -- kotlin / java ui and business logic implementation
+    --testing
 
 
-    
+
