@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#195e83</color>
+    <color name="colorPrimaryDark">#1979a9</color>
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="color_atmos">#AE6649</color>
+    <color name="color_clear">#E8C337</color>
+    <color name="color_clouds">#4E4E4E</color>
+    <color name="color_drizzle">#3588B4</color>
+    <color name="color_rain">#566F83</color>
+    <color name="color_snow">#000000</color>
+    <color name="color_thunderstorm">#091A24</color>
 </resources>
