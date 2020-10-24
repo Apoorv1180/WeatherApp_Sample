@@ -14,6 +14,7 @@ import com.example.weatherapp_sample.databinding.FragmentHomeBinding
 import com.example.weatherapp_sample.di.Injector
 import com.example.weatherapp_sample.presentation.viewmodel.WeatherViewModel
 import com.example.weatherapp_sample.presentation.viewmodel.WeatherViewModelFactory
+import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
@@ -24,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var weatherViewModel: WeatherViewModel
 
     private lateinit var binding: FragmentHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -45,18 +47,12 @@ class HomeFragment : Fragment() {
         val responseCities = weatherViewModel.getAllCities()
         responseCities.observe(viewLifecycleOwner, Observer { Log.e("city",it.toString()) })
 
-        include.setOnClickListener{
+        searchButton.setOnClickListener{
             val responseData = weatherViewModel.getWeatherForCity("Pune")
             if (responseData != null) {
                 responseData.observe(viewLifecycleOwner, Observer { Log.e("data",it.toString()) })
             }
         }
-        // val responseData = weatherViewModel.getWeatherForCity("Pune")
-
-
-
-    }
-    companion object {
 
     }
 }
