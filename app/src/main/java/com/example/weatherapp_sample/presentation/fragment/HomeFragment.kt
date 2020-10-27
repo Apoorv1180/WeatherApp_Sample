@@ -41,9 +41,6 @@ class HomeFragment : Fragment() {
     private lateinit var adapter:MovieAdapter
     private lateinit var cursorAdapter :CursorAdapter
     var suggestions = ArrayList<String>()
-    val from :Array<String> = arrayOf()
-    val to :Array<String> = arrayOf()
-
 
     private lateinit var binding: FragmentHomeBinding
 
