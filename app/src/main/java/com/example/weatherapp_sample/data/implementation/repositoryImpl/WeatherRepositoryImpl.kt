@@ -32,6 +32,22 @@ class WeatherRepositoryImpl(
         }
     }
 
+    override suspend fun getAllWeatherDetails(): List<WeatherList> =  getAllWeatherDetailsFromDb()
+
+
+    suspend fun getAllWeatherDetailsFromDb():List<WeatherList> {
+        lateinit var list:List<WeatherList>
+
+        try {
+            list = weatherDbDataSource.getAllWeatherList()
+        }
+        catch (e:Exception){
+            Log.e("Repository1",e.localizedMessage.toString())
+        }
+        return list
+    }
+
+
     suspend fun getWeatherDetailsForCityFromApi(city: String) :WeatherList? {
         var weatherList :WeatherList? = null
         try{

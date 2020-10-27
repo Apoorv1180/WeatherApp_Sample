@@ -33,4 +33,5 @@ class WeatherCacheDataSourceImpl : WeatherCacheDataSource {
         this.cityList.clear()
         this.cityList.addAll(cityList)
     }
+
 }

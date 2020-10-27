@@ -12,6 +12,9 @@ interface WeatherDao {
     @Query("SELECT name FROM weather_details")
     suspend fun getAllCities() : List<String>
 
+    @Query("SELECT * FROM weather_details")
+    suspend fun getAllWeatherDetails() : List<WeatherList>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveWeatherDetails(weatherList: WeatherList)
 

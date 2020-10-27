@@ -9,4 +9,5 @@ interface WeatherCacheDataSource {
     suspend fun getWeatherDetailsFromCityFromCache(city : String) : WeatherList?
     suspend fun saveWeatherDetailsCacheForCity(weatherList: WeatherList)
     suspend fun saveCityList(cityList: ArrayList<String>)
+
 }

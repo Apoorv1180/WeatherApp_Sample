@@ -3,6 +3,7 @@ package com.example.weatherapp_sample.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp_sample.domain.usecase.GetAllCityUseCase
+import com.example.weatherapp_sample.domain.usecase.GetAllWeatherDetailsUseCase
 import com.example.weatherapp_sample.domain.usecase.GetWeatherDetailsForCityUseCase
 import com.example.weatherapp_sample.domain.usecase.UpdateWeatherDetailsForCityUseCase
 
@@ -10,9 +11,11 @@ import com.example.weatherapp_sample.domain.usecase.UpdateWeatherDetailsForCityU
 class WeatherViewModelFactory(
     private val getWeatherDetailsForCityUseCase: GetWeatherDetailsForCityUseCase,
     private val getAllCityUseCase: GetAllCityUseCase,
-    private val updateWeatherDetailsForCityUseCase: UpdateWeatherDetailsForCityUseCase
+    private val updateWeatherDetailsForCityUseCase: UpdateWeatherDetailsForCityUseCase,
+    private val getAllWeatherDetailsUseCase: GetAllWeatherDetailsUseCase
+
 ) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return WeatherViewModel(getWeatherDetailsForCityUseCase,getAllCityUseCase,updateWeatherDetailsForCityUseCase) as T
+        return WeatherViewModel(getWeatherDetailsForCityUseCase,getAllCityUseCase,updateWeatherDetailsForCityUseCase,getAllWeatherDetailsUseCase) as T
     }
 }

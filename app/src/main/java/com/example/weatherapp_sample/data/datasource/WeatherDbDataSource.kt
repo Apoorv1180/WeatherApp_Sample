@@ -9,5 +9,6 @@ interface WeatherDbDataSource {
     suspend fun getWeatherDetailsDbForCity(city :String) : WeatherList
     suspend fun saveWeatherDetailsDbForCity(weatherList : WeatherList)
     suspend fun clearAllWeatherList()
+    suspend fun getAllWeatherList():List<WeatherList>
 
 }

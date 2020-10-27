@@ -8,4 +8,5 @@ interface WeatherRepository {
     suspend fun getAllCities():List<String>
     suspend fun getWeatherDetailsForCity(city: String): WeatherList
     suspend fun updateWeatherDetailsForDbCities()
+    suspend fun getAllWeatherDetails():List<WeatherList>
 }

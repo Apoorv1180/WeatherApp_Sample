@@ -20,4 +20,5 @@ class WeatherDbDataSourceImpl(val weatherDao: WeatherDao) : WeatherDbDataSource 
             weatherDao.deleteAllWeatherDetails()
         }
     }
+    override suspend fun getAllWeatherList(): List<WeatherList> = weatherDao.getAllWeatherDetails()
 }

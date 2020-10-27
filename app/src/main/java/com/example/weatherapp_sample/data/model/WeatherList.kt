@@ -1,18 +1,18 @@
 package com.example.weatherapp_sample.data.model
 
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.databinding.BindingAdapter
+import androidx.room.*
 import com.example.weatherapp_sample.data.typeConverters.DataConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "weather_details")
 data class WeatherList(
     @SerializedName("cod")
+    @ColumnInfo(name = "cod")
     val cod: Int,
-    @SerializedName("dt")
+    @ColumnInfo(name = "date")
+    @SerializedName("date")
     val dt: Int,
     @PrimaryKey
     @SerializedName("id")
@@ -24,6 +24,9 @@ data class WeatherList(
     val name: String,
     @SerializedName("visibility")
     val visibility: Int,
+    @Embedded(prefix = "sys_")
+    @SerializedName("sys")
+    val sys: Sys,
     @TypeConverters(DataConverter::class)
     @SerializedName("weather")
     val weather: List<Weather>,
