@@ -64,19 +64,75 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initInjection()
+        //setting up search view with default | no suggestions
         setSearchView()
+        //initialising view model
         initViewModel()
+        //recycler view for all searched weather history
+        // - behavior expected - must update as soon as the query is searched
         initRecyclerView()
+        //loads all weather details history [contains observer ]
         displayWeatherDetails()
+        //fetches cities searched from cache or database once searched
+        // and called for weather details .
         fetchSuggestions()
 
+        //binding search view with cursor adapter
         searchViewQuery()
+
+        //submit search
         searchButton.setOnClickListener { if(!TextUtils.isEmpty(autoCompleteCity.query.toString())){
             observeWeatherData(autoCompleteCity.query.toString())
 
         }
             hideKeyboard()
         }
+
+        //submit and query change listeners
+        searchqueryfunctioning()
+    }
+
+    private fun searchqueryfunctioning() {
+        binding.include.autoCompleteCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                hideKeyboard()
+                if(query!=null) {
+                    observeWeatherData(query)
+                    displayWeatherDetails()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                val cursor = MatrixCursor(arrayOf(BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1))
+                query?.let {
+                    suggestions.forEachIndexed { index, suggestion ->
+                        if (suggestion.contains(query, true))
+                            cursor.addRow(arrayOf(index, suggestion))
+                    }
+                }
+
+                cursorAdapter.changeCursor(cursor)
+                binding.include.autoCompleteCity.setSuggestionsAdapter(cursorAdapter);
+                return true
+            }
+        })
+
+        binding.include.autoCompleteCity.setOnSuggestionListener(object: SearchView.OnSuggestionListener {
+            override fun onSuggestionSelect(position: Int): Boolean {
+                return false
+            }
+
+            override fun onSuggestionClick(position: Int): Boolean {
+                hideKeyboard()
+                val cursor = autoCompleteCity.suggestionsAdapter.getItem(position) as Cursor
+                val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
+                autoCompleteCity.setQuery(selection, false)
+                // Do something with selection
+                observeWeatherData(selection)
+                return true
+            }
+        })
     }
 
     private fun searchViewQuery() {
@@ -139,12 +195,14 @@ class HomeFragment : Fragment() {
             })
     }
 
+    //added for checking
     override fun onResume() {
         super.onResume()
         displayWeatherDetails()
         fetchSuggestions()
     }
 
+    //binding data for single card shown as result
     private fun setData(it: WeatherList?) {
         if(it!=null) {
             binding.weather = it
@@ -153,6 +211,7 @@ class HomeFragment : Fragment() {
             binding.mainLayout.present =false
         }
     }
+
 
     private fun fetchSuggestions() {
         var responseCities = weatherViewModel.getAllCities()
@@ -173,46 +232,6 @@ class HomeFragment : Fragment() {
             })
         }
 
-        binding.include.autoCompleteCity.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                hideKeyboard()
-                if(query!=null) {
-                    observeWeatherData(query)
-                    displayWeatherDetails()
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                val cursor = MatrixCursor(arrayOf(BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1))
-                query?.let {
-                    suggestions.forEachIndexed { index, suggestion ->
-                        if (suggestion.contains(query, true))
-                            cursor.addRow(arrayOf(index, suggestion))
-                    }
-                }
-
-                cursorAdapter.changeCursor(cursor)
-                binding.include.autoCompleteCity.setSuggestionsAdapter(cursorAdapter);
-                return true
-            }
-        })
-
-        binding.include.autoCompleteCity.setOnSuggestionListener(object: SearchView.OnSuggestionListener {
-            override fun onSuggestionSelect(position: Int): Boolean {
-                return false
-            }
-
-            override fun onSuggestionClick(position: Int): Boolean {
-                hideKeyboard()
-                val cursor = autoCompleteCity.suggestionsAdapter.getItem(position) as Cursor
-                val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
-                autoCompleteCity.setQuery(selection, false)
-                // Do something with selection
-                observeWeatherData(selection)
-                return true
-            }
-        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
