@@ -9,6 +9,7 @@ import retrofit2.Response
 class WeatherRemoteDataSourceImpl(val apiService: WeatherApiService, val appId : String) :
     WeatherRemoteDataSource {
 
-    override suspend fun getWeatherDetailsRemoteForCity(city: String): Response<WeatherList> = apiService.getWeatherForCity(appId , city)
+    override suspend fun getWeatherDetailsRemoteForCity(city: String): Response<WeatherList> =
+        apiService.getWeatherForCity(appId, city)
 
 }

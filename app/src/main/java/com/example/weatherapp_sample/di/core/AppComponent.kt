@@ -7,16 +7,15 @@ import javax.inject.Singleton
 
 @Singleton
 @Component
-    (modules = [
-AppModule::class,
-NetModule::class,
-DataBaseModule::class,
-UseCaseModule::class,
-RepositoryModule::class,
-RemoteDataSourceModule::class,
-DbDataSourceModule::class,
-CacheDataSourceModule::class
-]
+    (
+    modules = [
+        AppModule::class,
+        NetModule::class,
+        DataBaseModule::class,
+        UseCaseModule::class,
+        RepositoryModule::class,
+        RemoteDataSourceModule::class,
+        DbDataSourceModule::class]
 )
 interface AppComponent {
 

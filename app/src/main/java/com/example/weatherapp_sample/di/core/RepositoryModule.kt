@@ -1,7 +1,6 @@
 package com.example.weatherapp_sample.di.core
 
 
-import com.example.weatherapp_sample.data.datasource.WeatherCacheDataSource
 import com.example.weatherapp_sample.data.datasource.WeatherDbDataSource
 import com.example.weatherapp_sample.data.datasource.WeatherRemoteDataSource
 import com.example.weatherapp_sample.data.implementation.repositoryImpl.WeatherRepositoryImpl
@@ -18,8 +17,7 @@ class RepositoryModule {
     fun provideWeatherRepository(
         weatherRemoteDataSource: WeatherRemoteDataSource,
         weatherDbDataSource: WeatherDbDataSource,
-        weatherCacheDataSource: WeatherCacheDataSource
     ): WeatherRepository {
-        return WeatherRepositoryImpl(weatherRemoteDataSource,weatherDbDataSource,weatherCacheDataSource)
+        return WeatherRepositoryImpl(weatherRemoteDataSource, weatherDbDataSource)
     }
 }
